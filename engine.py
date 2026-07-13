@@ -11,6 +11,7 @@ class GameState:
     alive: bool
     height: int
     width: int
+    paused: bool = False
 
 
 def new_game(height: int, width: int) -> GameState:
@@ -49,6 +50,9 @@ def spawn_food(state: GameState) -> tuple[int, int]:
         if (r, c) not in occupied
     ]
     return random.choice(free_cells)
+
+def toggle_pause(state: GameState) -> GameState:
+    return replace(state, paused=not state.paused)
 
 
 def change_direction(state: GameState, new_dir: tuple[int, int]) -> GameState:
